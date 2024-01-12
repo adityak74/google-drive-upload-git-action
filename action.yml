@@ -32,6 +32,9 @@ inputs:
   namePrefix:
     description: 'Prefix to be added to target filename'
     required: false
+  workingDirectory:
+    description: "Working Directory to run the action from"
+    required: false
 
 runs:
   using: docker
