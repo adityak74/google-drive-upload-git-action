@@ -34,6 +34,7 @@ const (
 	useCompleteSourceName    = "useCompleteSourceFilenameAsName"
 	mirrorDirectoryStructure = "mirrorDirectoryStructure"
 	namePrefixInput          = "namePrefix"
+	workingDirectory         = "workingDirectory"
 )
 
 func uploadToDrive(svc *drive.Service, filename string, folderId string, driveFile *drive.File, name string, mimeType string) {
@@ -73,6 +74,14 @@ func uploadToDrive(svc *drive.Service, filename string, folderId string, driveFi
 }
 
 func main() {
+	// get working directory argument from action input
+	workingDirectory := githubactions.GetInput(workingDirectory)
+	if workingDirectory != "" {
+		err := os.Chdir(workingDirectory)
+		if err != nil {
+			githubactions.Fatalf(fmt.Sprintf("Couldn't change the working directory %v", err))
+		}
+	}
 
 	// get filename argument from action input
 	filename := githubactions.GetInput(filenameInput)

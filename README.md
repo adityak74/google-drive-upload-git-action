@@ -48,6 +48,12 @@ If true, the target file name will be the complete source filename and `name` pa
 ## ``mirrorDirectoryStructure``
 Required: **NO**
 
+## ``workingDirectory``
+Required: **NO**
+
+If set, the directory to change to before the action is run. This is likely most useful for mirroring a directory structure (See the example below)
+
+
 If true, the directory structure of the source file will be recreated relative to ``folderId``.
 
 ## ``namePrefix``
@@ -106,9 +112,10 @@ jobs:
         uses: adityak74/google-drive-upload-git-action@main
         with:
           credentials: ${{ secrets.DRIVE_CREDENTIALS }}
-          filename: w/x/y/z
+          filename: output/w/x/y/z
           folderId: ${{ secrets.folderId }}
           overwrite: "true"
           mirrorDirectoryStructure: "true"
+          workingDirectory: output/
           
 ```
